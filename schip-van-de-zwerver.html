@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Schip van de Zwerver</title>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: #121821;
+      --ink: #e9f1ff;
+      --muted:#a8b3c7;
+      --accent:#64d2ff;
+      --accent-2:#ffd166;
+      --danger:#ff6b6b;
+      --ok:#9be15d;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --radius: 14px;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f6f7fb;--panel:#ffffff;--ink:#0b1220;--muted:#4c5a70;--accent:#007aff;--accent-2:#ff7a00;
+      }
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(100,210,255,.07), transparent 60%),
+                  radial-gradient(900px 700px at 10% 110%, rgba(255,209,102,.06), transparent 60%), var(--bg);
+      color:var(--ink); font: 17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,system-ui,Arial;
+      -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+    .app{
+      max-width: 760px; margin: 0 auto; padding: 20px;
+      display:flex; flex-direction: column; min-height: calc(100dvh - 40px);
+    }
+    header{
+      display:flex; align-items:center; justify-content: space-between; gap:12px; margin: 6px 0 14px;
+    }
+    .logo{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.4px;}
+    .logo span{font-size: 14px; color:var(--muted); font-weight:600;}
+    .orbit{width:26px;height:26px; position:relative; display:inline-block}
+    .orbit:before,.orbit:after{content:""; position:absolute; inset:0; border-radius:50%;}
+    .orbit:before{box-shadow: inset 0 0 0 2px rgba(100,210,255,.45);}
+    .orbit:after{inset:4px; box-shadow: inset 0 0 0 2px rgba(255,209,102,.45);}
+    .controls{display:flex; gap:8px; align-items:center;}
+    button, .btn{
+      -webkit-tap-highlight-color: transparent;
+      appearance: none; border: none; background: var(--panel); color: var(--ink);
+      padding: 12px 14px; border-radius: 12px; box-shadow: var(--shadow);
+      font-weight: 600; letter-spacing:.2px;
+    }
+    button:active{transform: translateY(1px);}
+    .btn-secondary{background: transparent; box-shadow: none; border:1px solid rgba(255,255,255,.12); color: var(--muted);}
+    .btn-accent{background: linear-gradient(135deg, rgba(100,210,255,.18), rgba(100,210,255,.05)); border:1px solid rgba(100,210,255,.45);}
+    .btn-danger{background: linear-gradient(135deg, rgba(255,107,107,.15), rgba(255,107,107,.05)); border:1px solid rgba(255,107,107,.4);}
+    .screen{
+      background: rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,.09); border-radius: var(--radius);
+      padding: 18px 16px; min-height: 40dvh; backdrop-filter: blur(6px);
+    }
+    .text{
+      white-space: pre-wrap;
+    }
+    .choices{ display:grid; gap:10px; margin:16px 0 6px;}
+    .choices button{ text-align:left; width:100%; }
+    .hud{
+      display:flex; gap:10px; flex-wrap:wrap; margin:10px 0 0; color:var(--muted); font-size: 14px;
+    }
+    .pill{padding:8px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.14); background: rgba(0,0,0,.15);}
+    .log{
+      margin-top: 14px; max-height: 30dvh; overflow:auto; padding-right:4px;
+      border-top:1px dashed rgba(255,255,255,.15);
+    }
+    .log h3{font-size:13px; color:var(--muted); font-weight:700; letter-spacing:.6px; text-transform:uppercase;}
+    .log-entry{font-size: 14px; color: var(--muted); padding: 8px 0; border-bottom:1px dashed rgba(255,255,255,.08);}
+    .soft{color:var(--muted)}
+    .footerbar{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:auto; padding-top:16px;}
+    .range{display:flex; align-items:center; gap:10px;}
+    input[type="range"]{ width:120px;}
+    .sr{position:absolute; left:-9999px;}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="logo"><span class="orbit"></span> Schip van de Zwerver <span>— Vagebond</span></div>
+      <div class="controls">
+        <button class="btn-secondary" id="btnSave" aria-label="Opslaan">💾 Opslaan</button>
+        <button class="btn-secondary" id="btnLoad" aria-label="Laden">↺ Laden</button>
+        <button class="btn-accent" id="btnRestart" aria-label="Herstart">⟲ Herstart</button>
+      </div>
+    </header>
+
+    <section class="screen" role="region" aria-live="polite" aria-label="Spelscherm">
+      <div id="text" class="text"></div>
+      <div id="choices" class="choices"></div>
+      <div class="hud">
+        <div class="pill" id="hudLocation">Locatie: —</div>
+        <div class="pill" id="hudCondition">Status: —</div>
+        <div class="pill" id="hudMorale">Moraal: —</div>
+      </div>
+      <div class="log" id="log">
+        <h3>Logboek</h3>
+      </div>
+    </section>
+
+    <div class="footerbar">
+      <div class="soft">Tip: tik onderaan op je keuze — alles is touch‑vriendelijk.</div>
+      <div class="range">
+        <label for="font" class="soft">Tekstgrootte</label>
+        <input type="range" id="font" min="15" max="22" value="17" />
+      </div>
+    </div>
+  </div>
+
+  <script>
+  // --- Tiny narrative engine -------------------------------------------------
+  const state = {
+    node: "intro_bridge",
+    flags: {},
+    stats: { location: "Onbekende sector", condition: "Krak", morale: 65 },
+    log: [],
+    version: 1
+  };
+
+  const elText = document.getElementById('text');
+  const elChoices = document.getElementById('choices');
+  const elLoc = document.getElementById('hudLocation');
+  const elCond = document.getElementById('hudCondition');
+  const elMorale = document.getElementById('hudMorale');
+  const elLog = document.getElementById('log');
+
+  function clamp(n,min,max){return Math.max(min, Math.min(max, n));}
+  function writeLog(s){ state.log.push({t:Date.now(), s}); renderLog(); }
+  function renderLog(){
+    elLog.innerHTML = '<h3>Logboek</h3>' + state.log.slice(-8).map(e=>`<div class="log-entry">• ${e.s}</div>`).join("");
+    elLog.scrollTop = elLog.scrollHeight;
+  }
+  function setStat(key, delta){
+    if(key==="morale"){ state.stats.morale = clamp(state.stats.morale + delta, 0, 100); }
+  }
+  function save(){
+    localStorage.setItem('zwerverSave', JSON.stringify(state));
+    alert("Opgeslagen.");
+  }
+  function load(){
+    const raw = localStorage.getItem('zwerverSave');
+    if(!raw) return alert("Geen save gevonden.");
+    try{
+      const data = JSON.parse(raw);
+      Object.assign(state, data);
+      go(state.node, true);
+      alert("Save geladen.");
+    } catch(e){ alert("Kon save niet laden."); }
+  }
+  function restart(){
+    if(!confirm("Herstarten? Niet-opgeslagen voortgang gaat verloren.")) return;
+    state.node = "intro_bridge";
+    state.flags = {};
+    state.stats = { location: "Onbekende sector", condition: "Krak", morale: 65 };
+    state.log = [];
+    go(state.node);
+    writeLog("Herstart van de missie.");
+  }
+
+  // Narrative nodes (excerpt from our session, with branching)
+  const N = {
+    intro_bridge: {
+      text: `BRUG VAN DE VAGEBOND
+
+De warp‑reactor bromt onder je voeten. Het testteam zit klaar. Elise's stem is kalm.
+
+ELISE: "Reactor op 94% testvermogen. Containment stabiel."
+ROKH: "Vol vermogen is ambitieus, kapitein."
+TAMSIN: "Coördinaten gereed, twee minuten in warp en terug."
+LYRA: "Voorraad vastgezet. Geen reserve voor warp‑onderdelen."
+
+Je aarzelt niet uit angst, maar uit verantwoordelijkheid.`,
+      choices: [
+        { label:"Beveel extra scans & verlaag vermogen", next:"scan_anomaly", onChoose:()=>writeLog("Voorzichtigheid gekozen: extra scans en lager vermogen.") },
+        { label:"Ga meteen op volle kracht (riskant)", next:"forced_jump", onChoose:()=>writeLog("We kozen voor snelheid. Het lot had andere plannen.") }
+      ],
+      hud:{ location:"Rand Sol", condition:"Gereed", morale:+0 }
+    },
+    scan_anomaly:{
+      text:`Elise detecteert een fluctuerend zwaartekrachtveld op de route.
+Je leidt om. De Vagebond glijdt langs het vreemde getij — tot het universum zelf je grijpt.
+
+Alarmen gillen. De warp ontsteekt zonder bevel. Licht. Donker. Stilte.
+
+ELISE: "…71.000 lichtjaar van plan. Geen menselijke signalen."`,
+      choices:[
+        { label:"Herpak je & scan de sector", next:"ghost_station", onChoose:()=>writeLog("We accepteren: we zijn in een ander kwadrant.") }
+      ],
+      hud:{ location:"Onbekend kwadrant", condition:"Beschadigd", morale:-5 }
+    },
+    forced_jump:{
+      text:`De sprong slaat om in chaos. Niets aan deze versnelling is van jullie.
+Je valt uit in een vreemde hemel. Elise bevestigt jullie angst: 71.000 ly van huis.
+
+De Vagebond is een generationeel schip geworden.`,
+      choices:[
+        { label:"Scan de sector", next:"ghost_station", onChoose:()=>writeLog("Nieuwe realiteit bevestigd.") }
+      ],
+      hud:{ location:"Onbekend kwadrant", condition:"Beschadigd", morale:-10 }
+    },
+    ghost_station:{
+      text:`Een leeg station zweeft voor je — geen transponder, geen bekende geometrie.
+Het is het eerste buitenaardse bouwwerk dat je ooit zag. De deur staat op een kier.`,
+      choices:[
+        { label:"Stuur drone + buiteninspectie", next:"station_inside", onChoose:()=>writeLog("Drone binnen, Rokh buiten. Eerste contact met het onbekende.") },
+        { label:"Laat het voor nu, zet koers weg", next:"crew_council", onChoose:()=>{setStat("morale",-3); writeLog("We weken af van de ontdekking — crew is ontevreden.");} }
+      ],
+      hud:{ location:"Buiten station", condition:"Voorzichtig", morale:+0 }
+    },
+    station_inside:{
+      text:`Binnen flikkert een blauwe kern. Met een minimale energiepuls ontvouwt zich een kaart:
+corridors tussen sterrenstelsels. Eén pad raakt jullie huidige positie.
+
+Het station zendt beelden: een ringplaneet, een donkere wolk, een tunnel van licht, een organisch schip.`,
+      choices:[
+        { label:"Kopieer de kaart & keer terug", next:"crew_council", onChoose:()=>writeLog("Kaart veiliggesteld. Onrust groeit.") },
+        { label:"Blijf en experimenteer verder (risico)", next:"risk_event", onChoose:()=>writeLog("Nieuwsgierigheid krijgt de overhand.") }
+      ],
+      hud:{ location:"Station – kern", condition:"Gefascineerd", morale:+2 }
+    },
+    risk_event:{
+      text:`Het station reageert fel. Elise snijdt de verbinding door.
+Je ontkomt met brandplekken — en een les in nederigheid.`,
+      choices:[
+        { label:"Terug naar schip voor overleg", next:"crew_council", onChoose:()=>{setStat("morale",-2);writeLog("We kwamen te dicht bij het vuur.");} }
+      ],
+      hud:{ location:"Terug naar brug", condition:"Beschadigd", morale:-2 }
+    },
+    crew_council:{
+      text:`Crisisoverleg. Drie stromingen ontstaan:
+1) Terug naar huis. 2) Exploitatie. 3) Hier vestigen.
+Jij kiest de koers naar Sol. Elise markeert de eerste corridor (5,2 pc).`,
+      choices:[
+        { label:"Vertrek naar corridor (voorzichtig)", next:"en_route_anomaly", onChoose:()=>writeLog("Koers naar huis gezet.") },
+        { label:"Eerst de crew beter leren kennen", next:"crew_chat", onChoose:()=>writeLog("We nemen tijd voor de mensen, niet alleen de missie.") }
+      ],
+      hud:{ location:"Vagebond – mess", condition:"Beraad", morale:+3 }
+    },
+    crew_chat:{
+      text:`Op de brug deel je intenties: terug naar Sol, ook al halen jullie het niet zelf. 
+De Vagebond is nu een generationeel schip. De ogen verharden, maar niemand wijkt.`,
+      choices:[
+        { label:"Zet alsnog koers naar de corridor", next:"en_route_anomaly", onChoose:()=>writeLog("We gaan. Huis is ver, maar niet vaag.") }
+      ],
+      hud:{ location:"Brug", condition:"Vastberaden", morale:+4 }
+    },
+    en_route_anomaly:{
+      text:`Onderweg naar de corridor duikt een massa‑anomalie op: 1,7 km lang, metaal & onbekend weefsel.
+Een periodieke puls — elke 32 seconden.`,
+      choices:[
+        { label:"Zend vredesgroet, scan & stuur drone", next:"meet_veyora", onChoose:()=>writeLog("We naderen met open hand en open ogen.") },
+        { label:"Vermijd en ga om", next:"corridor_edge", onChoose:()=>writeLog("Veiligheid boven nieuwsgierigheid.") }
+      ],
+      hud:{ location:"Corridor‑aanloop", condition:"Alert", morale:+0 }
+    },
+    meet_veyora:{
+      text:`Binnen in de kolos zweeft een bio‑technische kern. Ze is beschadigd, bijna stil.
+Met zorg herstel je lekken en stabiliseer je haar veld.
+
+Ze spreekt via resonantie: "Ik ben VEYORA. Gevaar op jullie route. Ga niet alleen."
+Ze biedt aan een stuk mee te reizen én de kortste weg te wijzen — tot aan het Rilath‑veld.`,
+      choices:[
+        { label:"Accepteer haar begeleiding", next:"depart_with_veyora", onChoose:()=>{setStat("morale",+5); writeLog("Veyora sluit zich bij ons aan."); state.flags.allyVeyora=true;} },
+        { label:"Vraag enkel de snelste route", next:"corridor_edge", onChoose:()=>writeLog("We nemen de kennis, maar niet de escort.") }
+      ],
+      hud:{ location:"Anomalie – binnen", condition:"Voorzichtig hoopvol", morale:+3 }
+    },
+    depart_with_veyora:{
+      text:`Veyora positioneert zich naast de Vagebond. Samen vormen jullie een vreemde formatie.
+Volgende halte: het Rilath‑veld — de sleutel, zegt ze, en de grens van haar pad.`,
+      choices:[
+        { label:"Op naar het veld", next:"routestart", onChoose:()=>writeLog("Twee schepen, één intentie: naar huis.") }
+      ],
+      hud:{ location:"Op koers", condition:"Coöperatief", morale:+6 }
+    },
+    corridor_edge:{
+      text:`Je bereikt de rand van de eerste corridor. Het voelt als een smalle doorgang in een storm.
+Ver weg, iets beweegt mee in de schaduw.`,
+      choices:[
+        { label:"Ga de corridor in", next:"routestart", onChoose:()=>writeLog("We zetten door.") },
+        { label:"Keer terug voor meer voorbereidingen", next:"crew_council", onChoose:()=>writeLog("Twijfel is ook een koers.") }
+      ],
+      hud:{ location:"Corridor‑rand", condition:"Spanningsveld", morale:+0 }
+    },
+    routestart:{
+      text:`De corridor licht op. Elise vergrendelt koers. Veyora zingt zacht in het spectrum.
+De Vagebond glijdt een dunne lijn in — tussen sterren, verhalen, gevaren.
+
+Voor huis. Voor later. Voor hen die na jullie komen.`,
+      choices:[
+        { label:"— EINDE VAN DE DEMO — (Herstart of door met vrije modus)", next:"freeplay", onChoose:()=>writeLog("Demo‑hoofdstuk afgerond.") }
+      ],
+      hud:{ location:"Eerste corridor", condition:"Onderweg", morale:+8 }
+    },
+    freeplay:{
+      text:`Vrije modus: jouw beslissingen bepalen nu de toon.
+(Je kunt opnieuw beginnen of doorgaan en je eigen logboek schrijven.)`,
+      choices:[
+        { label:"Herstart vanaf de brug", next:"intro_bridge", onChoose:()=>restart() }
+      ],
+      hud:{ location:"Vrij", condition:"—", morale:+0 }
+    }
+  };
+
+  function go(id, skipAnim){
+    state.node = id;
+    const node = N[id];
+    if(!node){ elText.textContent="(Scene ontbreekt)"; return;}
+    // Apply HUD tweaks
+    if(node.hud){
+      if(node.hud.location) state.stats.location = node.hud.location;
+      if(node.hud.condition) state.stats.condition = node.hud.condition;
+      if(typeof node.hud.morale === 'number') setStat("morale", node.hud.morale);
+    }
+    // Render text with a light typewriter effect for mobile
+    elText.innerHTML = "";
+    const txt = node.text;
+    if(skipAnim){ elText.textContent = txt; }
+    else {
+      let i=0; const speed = 10; // ms per char
+      const timer = setInterval(()=>{
+        elText.textContent += txt[i++];
+        if(i>=txt.length) clearInterval(timer);
+      }, speed);
+    }
+    // Render choices
+    elChoices.innerHTML = "";
+    node.choices.forEach((c, idx)=>{
+      const b = document.createElement('button');
+      b.className = "btn";
+      b.innerText = c.label;
+      b.addEventListener('click',()=>{
+        c.onChoose && c.onChoose();
+        go(c.next);
+      });
+      elChoices.appendChild(b);
+    });
+    // HUD
+    elLoc.textContent = "Locatie: " + state.stats.location;
+    elCond.textContent = "Status: " + state.stats.condition;
+    elMorale.textContent = "Moraal: " + state.stats.morale + "%";
+  }
+
+  // UI wires
+  document.getElementById('btnSave').addEventListener('click', save);
+  document.getElementById('btnLoad').addEventListener('click', load);
+  document.getElementById('btnRestart').addEventListener('click', restart);
+  document.getElementById('font').addEventListener('input', (e)=>{
+    document.body.style.fontSize = e.target.value + "px";
+  });
+
+  // Boot
+  go(state.node);
+  writeLog("Testvlucht gestart. De rest schrijven wij.");
+  </script>
+</body>
+</html>
