@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="nl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aandelen Gezondheidschecker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>Aandelen Gezondheidschecker</h1>
+    <p class="subtitle">Fundamentele gezondheid per aandeel in één oogopslag</p>
+    <input
+      id="search"
+      type="search"
+      placeholder="Zoek op ticker of naam…"
+      aria-label="Zoek aandeel"
+    />
+    <p id="updated" class="updated"></p>
+  </header>
+
+  <main>
+    <section id="grid" class="stock-grid" aria-live="polite"></section>
+    <p id="empty-state" class="empty-state" hidden>Geen aandelen gevonden.</p>
+  </main>
+
+  <div id="detail-overlay" class="detail-overlay" hidden>
+    <div class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+      <button id="detail-close" class="detail-close" aria-label="Sluiten">×</button>
+      <h2 id="detail-title"></h2>
+      <p id="detail-overall" class="detail-overall"></p>
+      <ul id="detail-metrics" class="detail-metrics"></ul>
+      <p id="detail-source-note" class="detail-source-note"></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

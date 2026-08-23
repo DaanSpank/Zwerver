@@ -1,0 +1,494 @@
+{
+  "generated_at": "2026-08-23T19:25:28+00:00",
+  "note": "Placeholder-data. Wordt overschreven door de eerste run van de 'Update stock data' GitHub Action.",
+  "stocks": [
+    {
+      "ticker": "AAPL",
+      "name": "Apple Inc.",
+      "overall_color": "yellow",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 32,
+          "unit": "x",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 1.8,
+          "unit": "x",
+          "color": "red",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 1.5,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.05,
+          "unit": "%",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 100000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": 0.16,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "MSFT",
+      "name": "Microsoft Corporation",
+      "overall_color": "green",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 35,
+          "unit": "x",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.35,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.38,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.15,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 70000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": 0.25,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "GOOGL",
+      "name": "Alphabet Inc.",
+      "overall_color": "green",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 24,
+          "unit": "x",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.08,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.3,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.1,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 60000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": null,
+          "unit": "%",
+          "color": "na",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "AMZN",
+      "name": "Amazon.com Inc.",
+      "overall_color": "yellow",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 40,
+          "unit": "x",
+          "color": "red",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.55,
+          "unit": "x",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.2,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.11,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 30000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": null,
+          "unit": "%",
+          "color": "na",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "NVDA",
+      "name": "NVIDIA Corporation",
+      "overall_color": "green",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 55,
+          "unit": "x",
+          "color": "red",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.4,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.9,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.6,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 25000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": 0.02,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "TSLA",
+      "name": "Tesla Inc.",
+      "overall_color": "yellow",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 70,
+          "unit": "x",
+          "color": "red",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.2,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.1,
+          "unit": "%",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.02,
+          "unit": "%",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 3000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": null,
+          "unit": "%",
+          "color": "na",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "ASML",
+      "name": "ASML Holding N.V.",
+      "overall_color": "green",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 30,
+          "unit": "x",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.4,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.45,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": 0.05,
+          "unit": "%",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 3000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": 0.45,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    },
+    {
+      "ticker": "SHEL",
+      "name": "Shell plc",
+      "overall_color": "green",
+      "metrics": [
+        {
+          "id": "pe_ratio",
+          "label": "Koers/Winst-verhouding",
+          "value": 8,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
+        },
+        {
+          "id": "debt_to_equity",
+          "label": "Schuld / Eigen vermogen",
+          "value": 0.4,
+          "unit": "x",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lagere schuldgraad betekent minder financieel risico."
+        },
+        {
+          "id": "roe",
+          "label": "Return on Equity",
+          "value": 0.12,
+          "unit": "%",
+          "color": "yellow",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
+        },
+        {
+          "id": "revenue_growth",
+          "label": "Omzetgroei (YoY)",
+          "value": -0.05,
+          "unit": "%",
+          "color": "red",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Groei van de omzet ten opzichte van vorig jaar."
+        },
+        {
+          "id": "free_cash_flow",
+          "label": "Free Cash Flow",
+          "value": 20000000000.0,
+          "unit": "$",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
+        },
+        {
+          "id": "dividend_payout",
+          "label": "Dividend uitkeringsratio",
+          "value": 0.35,
+          "unit": "%",
+          "color": "green",
+          "source": "Voorbeelddata (placeholder)",
+          "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
+        }
+      ]
+    }
+  ]
+}

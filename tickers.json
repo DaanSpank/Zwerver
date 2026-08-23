@@ -1,0 +1,13 @@
+{
+  "_comment": "Watchlist van tickers die de GitHub Action ophaalt. Voeg of verwijder tickers en commit/push om ze mee te nemen in de volgende data-update.",
+  "tickers": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "NVDA",
+    "TSLA",
+    "ASML",
+    "SHEL"
+  ]
+}
