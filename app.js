@@ -11,6 +11,74 @@ function flashButton(btn, message) {
   setTimeout(() => (btn.textContent = original), 1400);
 }
 
+const statusMsg = document.getElementById("status-msg");
+let statusTimer = null;
+
+function showStatus(message, isError) {
+  statusMsg.textContent = message;
+  statusMsg.classList.toggle("is-error", Boolean(isError));
+  statusMsg.hidden = false;
+  clearTimeout(statusTimer);
+  statusTimer = setTimeout(() => (statusMsg.hidden = true), 8000);
+}
+
+function getWorkerConfig() {
+  return {
+    url: localStorage.getItem("watchlistWorkerUrl") || "",
+    secret: localStorage.getItem("watchlistWorkerSecret") || "",
+  };
+}
+
+const settingsBtn = document.getElementById("settings-btn");
+settingsBtn.addEventListener("click", () => {
+  const current = getWorkerConfig();
+  const url = window.prompt(
+    "Worker-URL (leeg laten om de automatische opslag uit te zetten):",
+    current.url
+  );
+  if (url === null) return;
+  const secret = window.prompt("Toegangscode (SHARED_SECRET):", current.secret);
+  if (secret === null) return;
+  localStorage.setItem("watchlistWorkerUrl", url.trim());
+  localStorage.setItem("watchlistWorkerSecret", secret.trim());
+  showStatus(
+    url.trim()
+      ? "Instellingen opgeslagen — toevoegen/verwijderen werkt nu direct."
+      : "Automatische opslag uitgezet — knoppen vallen terug op kopiëren + GitHub."
+  );
+});
+
+/**
+ * Probeert de ticker via de Cloudflare Worker toe te voegen/verwijderen.
+ * Geeft true terug bij succes, false als er geen Worker is ingesteld of
+ * de aanroep faalt (aanroeper valt dan terug op de kopieer+GitHub-flow).
+ */
+async function callWorker(action, ticker) {
+  const { url, secret } = getWorkerConfig();
+  if (!url || !secret) return false;
+
+  try {
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${secret}`,
+      },
+      body: JSON.stringify({ action, ticker }),
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      showStatus(`Kon niet opslaan: ${err.error || res.statusText}`, true);
+      return false;
+    }
+    return true;
+  } catch (err) {
+    showStatus("Kon de watchlist-service niet bereiken.", true);
+    console.error(err);
+    return false;
+  }
+}
+
 const STATUS_META = {
   green: { icon: "✓", label: "Gezond", className: "status-good" },
   yellow: { icon: "!", label: "Let op", className: "status-warning" },
@@ -32,6 +100,7 @@ const detailClose = document.getElementById("detail-close");
 
 let stocks = [];
 let universe = [];
+const pendingAdded = new Set();
 
 const tabWatchlist = document.getElementById("tab-watchlist");
 const tabExplore = document.getElementById("tab-explore");
@@ -101,8 +170,21 @@ function renderCard(stock) {
   removeBtn.title = `${stock.ticker} verwijderen uit watchlist`;
   removeBtn.setAttribute("aria-label", `${stock.ticker} verwijderen uit watchlist`);
   removeBtn.textContent = "Verwijderen uit watchlist";
-  removeBtn.addEventListener("click", (e) => {
+  removeBtn.addEventListener("click", async (e) => {
     e.stopPropagation();
+    removeBtn.disabled = true;
+    const worked = await callWorker("remove", stock.ticker);
+    removeBtn.disabled = false;
+
+    if (worked) {
+      stocks = stocks.filter((s) => s.ticker !== stock.ticker);
+      renderGrid(searchInput.value);
+      showStatus(
+        `${stock.ticker} verwijderd. De site ververst zichzelf over ~1-2 minuten met de nieuwe watchlist.`
+      );
+      return;
+    }
+
     copyText(`Verwijder de regel "${stock.ticker}", uit tickers.json`);
     window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
     flashButton(removeBtn, "Instructie gekopieerd, GitHub geopend…");
@@ -193,7 +275,8 @@ function renderExplore(filter) {
 
   exploreBody.innerHTML = "";
   filtered.forEach((t) => {
-    const alreadyTracked = stocks.some((s) => s.ticker === t.ticker);
+    const alreadyTracked =
+      stocks.some((s) => s.ticker === t.ticker) || pendingAdded.has(t.ticker);
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><strong>${t.ticker}</strong></td>
@@ -213,7 +296,7 @@ function renderExplore(filter) {
   exploreEmptyState.hidden = filtered.length !== 0;
 }
 
-exploreBody.addEventListener("click", (e) => {
+exploreBody.addEventListener("click", async (e) => {
   const copyBtn = e.target.closest(".copy-btn");
   if (copyBtn) {
     copyText(copyBtn.dataset.ticker);
@@ -223,7 +306,21 @@ exploreBody.addEventListener("click", (e) => {
 
   const addBtn = e.target.closest(".add-btn");
   if (addBtn) {
-    copyText(`"${addBtn.dataset.ticker}",`);
+    const ticker = addBtn.dataset.ticker;
+    addBtn.disabled = true;
+    const worked = await callWorker("add", ticker);
+    addBtn.disabled = false;
+
+    if (worked) {
+      pendingAdded.add(ticker);
+      showStatus(
+        `${ticker} toegevoegd. De cijfers verschijnen over ~1-2 minuten, ververs de pagina dan.`
+      );
+      renderExplore(searchInput.value);
+      return;
+    }
+
+    copyText(`"${ticker}",`);
     window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
     flashButton(addBtn, "Gekopieerd, GitHub geopend…");
   }

@@ -104,6 +104,25 @@ body {
   border-bottom-color: var(--text-primary);
 }
 
+.settings-btn {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.status-msg {
+  margin: 10px 0 0;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  background: var(--gridline);
+  color: var(--text-primary);
+  max-width: 480px;
+}
+
+.status-msg.is-error {
+  color: var(--status-critical);
+}
+
 .explore-hint {
   color: var(--text-secondary);
   font-size: 0.9rem;

@@ -18,6 +18,9 @@
       <button id="tab-explore" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-explore">
         Nieuwe tickers zoeken
       </button>
+      <button id="settings-btn" class="tab-btn settings-btn" type="button" title="Watchlist-service instellen">
+        ⚙ Instellingen
+      </button>
     </div>
 
     <input
@@ -27,6 +30,7 @@
       aria-label="Zoek aandeel"
     />
     <p id="updated" class="updated"></p>
+    <p id="status-msg" class="status-msg" hidden></p>
   </header>
 
   <main>
@@ -38,10 +42,10 @@
     <section id="panel-explore" role="tabpanel" aria-labelledby="tab-explore" hidden>
       <p class="explore-hint">
         Referentielijst van bekende Amerikaanse en Europese aandelen om te onderzoeken.
-        Dit zijn geen live cijfers. Klik <strong>+ Toevoegen</strong> om de ticker te
-        kopiëren en <code>tickers.json</code> te openen op GitHub — plak de regel direct
-        onder <code>"tickers": [</code> en klik op "Commit changes". De volgende run van
-        de "Update stock data"-Action haalt 'm dan op. Kun je ook gewoon in de chat vragen.
+        Dit zijn geen live cijfers. Klik <strong>+ Toevoegen</strong> om 'm meteen aan je
+        watchlist toe te voegen (na eenmalig instellen via <strong>⚙ Instellingen</strong>) —
+        zonder instellingen valt de knop terug op kopiëren + GitHub openen. Kun je ook
+        gewoon in de chat vragen.
       </p>
       <div id="explore-table-wrap" class="explore-table-wrap">
         <table class="explore-table">

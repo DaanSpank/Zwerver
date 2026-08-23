@@ -26,21 +26,23 @@ server-side in de Action, waar CORS geen rol speelt.
 
 ## Aandelen toevoegen/verwijderen
 
-De site is puur statisch, dus kan zelf niet naar GitHub committen (dat zou
-een geheime GitHub-sleutel in de publieke pagina vereisen — een
-beveiligingsrisico). Er zijn twee manieren om `tickers.json` toch te
-wijzigen:
+Er zijn drie manieren:
 
-1. **Via de site**: op de tab "Nieuwe tickers zoeken" kopieert
-   **+ Toevoegen** de ticker en opent de GitHub-editpagina van
-   `tickers.json` — plak de regel direct onder `"tickers": [` en klik op
-   "Commit changes". Op de watchlist-tab doet **Verwijderen uit watchlist**
-   hetzelfde, maar dan met een instructie om de betreffende regel te
-   verwijderen.
-2. **Via de chat**: vraag het gewoon (bv. "voeg SAP.DE toe" / "haal TSLA
+1. **Rechtstreeks in de app (aanbevolen)**: eenmalig instellen via
+   **⚙ Instellingen** (zie [`cloudflare-worker/README.md`](./cloudflare-worker/README.md)
+   voor de setup van de gratis Cloudflare Worker die dit mogelijk maakt).
+   Daarna werken **+ Toevoegen** en **Verwijderen uit watchlist** direct,
+   inclusief het automatisch starten van de data-update.
+2. **Via de site zonder instellingen**: **+ Toevoegen**/**Verwijderen**
+   kopiëren de juiste tekst naar het klembord en openen de GitHub-
+   editpagina van `tickers.json` — plakken en committen doe je dan zelf.
+3. **Via de chat**: vraag het gewoon (bv. "voeg SAP.DE toe" / "haal TSLA
    weg") — dan bewerk en push ik `tickers.json` direct.
 
-Na een wijziging neemt de volgende dagelijkse Action-run (of een
+De site is en blijft verder 100% statisch (geen backend nodig om de site
+zelf te draaien) — de Worker is puur een optioneel, apart schrijf-endpoint
+en houdt als enige het GitHub-token vast (server-side, nooit in de
+browser). Na een wijziging neemt de volgende dagelijkse Action-run (of een
 handmatige trigger via **Actions → Update stock data → Run workflow**) de
 nieuwe watchlist mee.
 
