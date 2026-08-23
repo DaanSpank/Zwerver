@@ -1,3 +1,16 @@
+const TICKERS_JSON_EDIT_URL =
+  "https://github.com/DaanSpank/Zwerver/edit/main/tickers.json";
+
+function copyText(text) {
+  return navigator.clipboard?.writeText(text);
+}
+
+function flashButton(btn, message) {
+  const original = btn.textContent;
+  btn.textContent = message;
+  setTimeout(() => (btn.textContent = original), 1400);
+}
+
 const STATUS_META = {
   green: { icon: "✓", label: "Gezond", className: "status-good" },
   yellow: { icon: "!", label: "Let op", className: "status-warning" },
@@ -47,9 +60,10 @@ function formatValue(metric) {
 }
 
 function renderCard(stock) {
-  const card = document.createElement("button");
+  const card = document.createElement("div");
   card.className = "stock-card";
-  card.type = "button";
+  card.setAttribute("role", "button");
+  card.setAttribute("tabindex", "0");
   card.setAttribute("aria-haspopup", "dialog");
 
   const overall = STATUS_META[stock.overall_color] || STATUS_META.na;
@@ -81,9 +95,29 @@ function renderCard(stock) {
     metricRow.appendChild(chip);
   });
 
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.className = "remove-btn";
+  removeBtn.title = `${stock.ticker} verwijderen uit watchlist`;
+  removeBtn.setAttribute("aria-label", `${stock.ticker} verwijderen uit watchlist`);
+  removeBtn.textContent = "Verwijderen uit watchlist";
+  removeBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    copyText(`Verwijder de regel "${stock.ticker}", uit tickers.json`);
+    window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
+    flashButton(removeBtn, "Instructie gekopieerd, GitHub geopend…");
+  });
+
   card.appendChild(top);
   card.appendChild(metricRow);
+  card.appendChild(removeBtn);
   card.addEventListener("click", () => openDetail(stock));
+  card.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      openDetail(stock);
+    }
+  });
   return card;
 }
 
@@ -159,12 +193,20 @@ function renderExplore(filter) {
 
   exploreBody.innerHTML = "";
   filtered.forEach((t) => {
+    const alreadyTracked = stocks.some((s) => s.ticker === t.ticker);
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td><strong>${t.ticker}</strong></td>
       <td>${t.name}</td>
       <td>${t.exchange || "VS (NYSE/Nasdaq)"}</td>
-      <td><button type="button" class="copy-btn" data-ticker="${t.ticker}">Kopieer</button></td>
+      <td class="explore-actions">
+        <button type="button" class="copy-btn" data-ticker="${t.ticker}">Kopieer</button>
+        ${
+          alreadyTracked
+            ? `<span class="already-tracked">Al in watchlist</span>`
+            : `<button type="button" class="add-btn" data-ticker="${t.ticker}">+ Toevoegen</button>`
+        }
+      </td>
     `;
     exploreBody.appendChild(tr);
   });
@@ -172,13 +214,19 @@ function renderExplore(filter) {
 }
 
 exploreBody.addEventListener("click", (e) => {
-  const btn = e.target.closest(".copy-btn");
-  if (!btn) return;
-  navigator.clipboard?.writeText(btn.dataset.ticker).then(() => {
-    const original = btn.textContent;
-    btn.textContent = "Gekopieerd!";
-    setTimeout(() => (btn.textContent = original), 1200);
-  });
+  const copyBtn = e.target.closest(".copy-btn");
+  if (copyBtn) {
+    copyText(copyBtn.dataset.ticker);
+    flashButton(copyBtn, "Gekopieerd!");
+    return;
+  }
+
+  const addBtn = e.target.closest(".add-btn");
+  if (addBtn) {
+    copyText(`"${addBtn.dataset.ticker}",`);
+    window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
+    flashButton(addBtn, "Gekopieerd, GitHub geopend…");
+  }
 });
 
 function setActiveTab(tab) {

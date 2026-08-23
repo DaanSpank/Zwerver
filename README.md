@@ -26,17 +26,30 @@ server-side in de Action, waar CORS geen rol speelt.
 
 ## Aandelen toevoegen/verwijderen
 
-Bewerk `tickers.json` en commit. De volgende run van de Action (of een
-handmatige trigger via **Actions → Update stock data → Run workflow**)
-neemt de wijziging mee.
+De site is puur statisch, dus kan zelf niet naar GitHub committen (dat zou
+een geheime GitHub-sleutel in de publieke pagina vereisen — een
+beveiligingsrisico). Er zijn twee manieren om `tickers.json` toch te
+wijzigen:
 
-Om nieuwe tickers te vínden staat er in de site een tab **"Nieuwe tickers
-zoeken"**: een doorzoekbare referentielijst van ~280 bekende Amerikaanse en
-Europese large-cap aandelen (`data/ticker-universe.json`), los van je
-watchlist. Dit zijn geen live cijfers — vind een ticker, kopieer 'm en zet
-'m handmatig in `tickers.json`. Deze lijst is samengesteld uit
-trainingskennis (niet uit een live bron), dus controleer een ticker voordat
-je erop vertrouwt; zie het `note`-veld in dat bestand.
+1. **Via de site**: op de tab "Nieuwe tickers zoeken" kopieert
+   **+ Toevoegen** de ticker en opent de GitHub-editpagina van
+   `tickers.json` — plak de regel direct onder `"tickers": [` en klik op
+   "Commit changes". Op de watchlist-tab doet **Verwijderen uit watchlist**
+   hetzelfde, maar dan met een instructie om de betreffende regel te
+   verwijderen.
+2. **Via de chat**: vraag het gewoon (bv. "voeg SAP.DE toe" / "haal TSLA
+   weg") — dan bewerk en push ik `tickers.json` direct.
+
+Na een wijziging neemt de volgende dagelijkse Action-run (of een
+handmatige trigger via **Actions → Update stock data → Run workflow**) de
+nieuwe watchlist mee.
+
+Om nieuwe tickers te vínden staat er een doorzoekbare referentielijst van
+~280 bekende Amerikaanse en Europese large-cap aandelen
+(`data/ticker-universe.json`), los van je watchlist. Dit zijn geen live
+cijfers en de lijst is samengesteld uit trainingskennis (niet uit een live
+bron), dus controleer een ticker voordat je erop vertrouwt; zie het
+`note`-veld in dat bestand.
 
 ## Parameters
 
@@ -75,5 +88,3 @@ python3 scripts/fetch_data.py
   layoutwijzigingen op die sites — als een bron structureel niets meer
   oplevert, valt de volgende bron in de keten automatisch in.
 - Data wordt maximaal dagelijks ververst, niet real-time.
-- `data/stocks.json` bevat nu nog **voorbeelddata** (zie het `note`-veld)
-  totdat de eerste Action-run is geweest.

@@ -300,6 +300,53 @@ main {
   color: var(--text-muted);
 }
 
+.remove-btn {
+  align-self: flex-start;
+  font: inherit;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+  background: none;
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: 4px 9px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  color: var(--status-critical);
+  border-color: var(--status-critical);
+}
+
+.explore-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.add-btn {
+  font: inherit;
+  font-size: 0.8rem;
+  border: 1px solid var(--status-good);
+  background: none;
+  color: var(--status-good);
+  border-radius: 6px;
+  padding: 4px 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.add-btn:hover {
+  background: var(--status-good);
+  color: #ffffff;
+}
+
+.already-tracked {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
 .empty-state {
   color: var(--text-muted);
   text-align: center;
