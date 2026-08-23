@@ -28,36 +28,29 @@ server-side in de Action, waar CORS geen rol speelt.
 
 Er zijn drie manieren:
 
-1. **Rechtstreeks in de app (aanbevolen)**: klik **⚙ Instellingen** en plak
-   een eigen GitHub personal access token (zie hieronder). Daarna werken
-   **+ Toevoegen** en **Verwijderen uit watchlist** direct, inclusief het
-   automatisch starten van de data-update.
-2. **Via de site zonder token**: **+ Toevoegen**/**Verwijderen** kopiëren
-   de juiste tekst naar het klembord en openen de GitHub-editpagina van
-   `tickers.json` — plakken en committen doe je dan zelf.
+1. **Rechtstreeks in de app (aanbevolen)**: eenmalig instellen via
+   **⚙ Instellingen** — zie [`cloudflare-worker/README.md`](./cloudflare-worker/README.md)
+   voor de setup van de gratis Cloudflare Worker die dit mogelijk maakt.
+   Daarna werken **+ Toevoegen** en **Verwijderen uit watchlist** direct,
+   inclusief het automatisch starten van de data-update.
+2. **Via de site zonder instellingen**: **+ Toevoegen**/**Verwijderen**
+   kopiëren de juiste tekst naar het klembord en openen de GitHub-
+   editpagina van `tickers.json` — plakken en committen doe je dan zelf.
 3. **Via de chat**: vraag het gewoon (bv. "voeg SAP.DE toe" / "haal TSLA
    weg") — dan bewerk en push ik `tickers.json` direct.
+
+> **Waarom niet gewoon een eigen GitHub-token rechtstreeks in de
+> browser?** Dat is getest en werkt niet: GitHub's Contents API
+> ondersteunt geen CORS-preflight voor schrijfacties (PUT), dus de browser
+> blokkeert zo'n aanroep altijd, ongeacht het token. Een token dat je al
+> hebt aangemaakt (met "Contents: read/write" + optioneel "Actions:
+> read/write", scope beperkt tot deze repo) kun je gewoon hergebruiken —
+> plak 'm als `GITHUB_TOKEN`-secret in de Worker (stap 3 van de setup)
+> in plaats van in de browser.
 
 Na een wijziging neemt de volgende dagelijkse Action-run (of een
 handmatige trigger via **Actions → Update stock data → Run workflow**) de
 nieuwe watchlist mee.
-
-### Je eigen GitHub-token aanmaken
-
-De site blijft 100% statisch — er is geen server die het token bewaart.
-Het token wordt alleen lokaal in **jouw eigen browser** opgeslagen
-(`localStorage`) en gebruikt om rechtstreeks met de GitHub API te praten.
-Dat betekent ook: bewaar het net zo zorgvuldig als een wachtwoord, en
-gebruik alleen een token met minimale rechten:
-
-1. GitHub → **Settings** (je account) → **Developer settings** →
-   **Personal access tokens** → **Fine-grained tokens** → **Generate new
-   token**.
-2. **Repository access**: "Only select repositories" → `DaanSpank/Zwerver`.
-3. **Permissions**: **Contents** → *Read and write*. Optioneel ook
-   **Actions** → *Read and write*, zodat een toevoeging/verwijdering meteen
-   de data-update start in plaats van te wachten op de nachtelijke run.
-4. Genereer, kopieer, en plak 'm in **⚙ Instellingen** in de app.
 
 Om nieuwe tickers te vínden staat er een doorzoekbare referentielijst van
 ~280 bekende Amerikaanse en Europese large-cap aandelen

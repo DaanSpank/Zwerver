@@ -19,121 +19,69 @@ function showStatus(message, isError) {
   statusMsg.classList.toggle("is-error", Boolean(isError));
   statusMsg.hidden = false;
   clearTimeout(statusTimer);
-  statusTimer = setTimeout(() => (statusMsg.hidden = true), 8000);
+  // Foutmeldingen blijven staan (geen auto-hide) zodat ze niet worden
+  // gemist doordat de kopieer+GitHub-fallback meteen een nieuw tabblad opent.
+  if (!isError) {
+    statusTimer = setTimeout(() => (statusMsg.hidden = true), 8000);
+  }
 }
 
-const GITHUB_OWNER = "DaanSpank";
-const GITHUB_REPO = "Zwerver";
-const TICKERS_PATH = "tickers.json";
-
-function getGithubToken() {
-  return localStorage.getItem("githubToken") || "";
+function getWorkerConfig() {
+  return {
+    url: localStorage.getItem("watchlistWorkerUrl") || "",
+    secret: localStorage.getItem("watchlistWorkerSecret") || "",
+  };
 }
 
 const settingsBtn = document.getElementById("settings-btn");
 settingsBtn.addEventListener("click", () => {
-  const token = window.prompt(
-    "GitHub personal access token (fine-grained, alleen scope op DaanSpank/Zwerver, " +
-      "permissions Contents: read/write — optioneel ook Actions: read/write voor " +
-      "meteen verversen). Leeg laten om uit te zetten:",
-    getGithubToken()
+  const current = getWorkerConfig();
+  const url = window.prompt(
+    "Worker-URL (leeg laten om de automatische opslag uit te zetten):",
+    current.url
   );
-  if (token === null) return;
-  localStorage.setItem("githubToken", token.trim());
+  if (url === null) return;
+  const secret = window.prompt("Toegangscode (SHARED_SECRET):", current.secret);
+  if (secret === null) return;
+  localStorage.setItem("watchlistWorkerUrl", url.trim());
+  localStorage.setItem("watchlistWorkerSecret", secret.trim());
   showStatus(
-    token.trim()
-      ? "Token opgeslagen (alleen in jouw browser) — toevoegen/verwijderen werkt nu direct."
-      : "Token verwijderd — knoppen vallen terug op kopiëren + GitHub."
+    url.trim()
+      ? "Instellingen opgeslagen — toevoegen/verwijderen werkt nu direct."
+      : "Automatische opslag uitgezet — knoppen vallen terug op kopiëren + GitHub."
   );
 });
 
-function base64ToUtf8(b64) {
-  const binary = atob(b64.replace(/\n/g, ""));
-  const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-  return new TextDecoder().decode(bytes);
-}
-
-function utf8ToBase64(str) {
-  const bytes = new TextEncoder().encode(str);
-  let binary = "";
-  for (let i = 0; i < bytes.length; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
-}
-
 /**
- * Werkt tickers.json rechtstreeks bij via de GitHub API, met het token dat
- * de gebruiker zelf in ⚙ Instellingen heeft opgeslagen (alleen lokaal in
- * hun browser). Geeft true terug bij succes, false als er geen token is
- * ingesteld of de aanroep faalt (aanroeper valt dan terug op de
- * kopieer+GitHub-flow).
+ * Probeert de ticker via de Cloudflare Worker toe te voegen/verwijderen.
+ * (Een rechtstreekse browser->GitHub-API-aanroep bleek niet te werken:
+ * GitHub's Contents API ondersteunt geen CORS-preflight voor PUT, dus de
+ * browser blokkeert dat verzoek altijd. De Worker doet de aanroep
+ * server-side, waar CORS niet geldt.)
+ * Geeft true terug bij succes, false als er geen Worker is ingesteld of
+ * de aanroep faalt (aanroeper valt dan terug op de kopieer+GitHub-flow).
  */
-async function callGithubApi(action, ticker) {
-  const token = getGithubToken();
-  if (!token) return false;
-
-  const ghHeaders = {
-    Authorization: `Bearer ${token}`,
-    Accept: "application/vnd.github+json",
-  };
-  const contentsUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${TICKERS_PATH}`;
+async function callWorker(action, ticker) {
+  const { url, secret } = getWorkerConfig();
+  if (!url || !secret) return false;
 
   try {
-    const getRes = await fetch(`${contentsUrl}?ref=main`, { headers: ghHeaders });
-    if (!getRes.ok) {
-      showStatus(`Kon tickers.json niet lezen (${getRes.status}).`, true);
-      return false;
-    }
-    const file = await getRes.json();
-    const current = JSON.parse(base64ToUtf8(file.content));
-    const list = Array.isArray(current.tickers) ? current.tickers : [];
-
-    let newList = list;
-    let changed = false;
-    if (action === "add" && !list.includes(ticker)) {
-      newList = [...list, ticker];
-      changed = true;
-    } else if (action === "remove" && list.includes(ticker)) {
-      newList = list.filter((t) => t !== ticker);
-      changed = true;
-    }
-    if (!changed) return true;
-
-    current.tickers = newList;
-    const putRes = await fetch(contentsUrl, {
-      method: "PUT",
-      headers: { ...ghHeaders, "Content-Type": "application/json" },
-      body: JSON.stringify({
-        message:
-          action === "add"
-            ? `Voeg ${ticker} toe aan watchlist (via app)`
-            : `Verwijder ${ticker} uit watchlist (via app)`,
-        content: utf8ToBase64(JSON.stringify(current, null, 2) + "\n"),
-        sha: file.sha,
-        branch: "main",
-      }),
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${secret}`,
+      },
+      body: JSON.stringify({ action, ticker }),
     });
-    if (!putRes.ok) {
-      const detail = await putRes.json().catch(() => ({}));
-      showStatus(`Kon niet opslaan: ${detail.message || putRes.statusText}`, true);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      showStatus(`Kon niet opslaan: ${err.error || res.statusText}`, true);
       return false;
     }
-
-    // Best-effort: direct de data-refresh starten (vereist Actions-permissie
-    // op het token). Mag falen zonder de toevoeging/verwijdering ongedaan
-    // te maken — dan wacht het gewoon tot de nachtelijke run.
-    fetch(
-      `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/actions/workflows/update-data.yml/dispatches`,
-      {
-        method: "POST",
-        headers: { ...ghHeaders, "Content-Type": "application/json" },
-        body: JSON.stringify({ ref: "main" }),
-      }
-    ).catch(() => {});
-
     return true;
   } catch (err) {
-    showStatus("Kon GitHub niet bereiken.", true);
+    showStatus("Kon de watchlist-service niet bereiken.", true);
     console.error(err);
     return false;
   }
@@ -230,10 +178,18 @@ function renderCard(stock) {
   removeBtn.title = `${stock.ticker} verwijderen uit watchlist`;
   removeBtn.setAttribute("aria-label", `${stock.ticker} verwijderen uit watchlist`);
   removeBtn.textContent = "Verwijderen uit watchlist";
-  removeBtn.addEventListener("click", async (e) => {
+
+  function manualRemoveFallback(e) {
+    e.stopPropagation();
+    copyText(`Verwijder de regel "${stock.ticker}", uit tickers.json`);
+    window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
+    flashButton(removeBtn, "Instructie gekopieerd, GitHub geopend…");
+  }
+
+  async function attemptRemove(e) {
     e.stopPropagation();
     removeBtn.disabled = true;
-    const worked = await callGithubApi("remove", stock.ticker);
+    const worked = await callWorker("remove", stock.ticker);
     removeBtn.disabled = false;
 
     if (worked) {
@@ -245,10 +201,14 @@ function renderCard(stock) {
       return;
     }
 
-    copyText(`Verwijder de regel "${stock.ticker}", uit tickers.json`);
-    window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
-    flashButton(removeBtn, "Instructie gekopieerd, GitHub geopend…");
-  });
+    // Niet automatisch doorsturen: dat overschaduwt de foutmelding hierboven.
+    // Eerste mislukking toont de fout; een bewuste tweede klik doet het handmatig.
+    removeBtn.textContent = "Kopieer + open GitHub";
+    removeBtn.removeEventListener("click", attemptRemove);
+    removeBtn.addEventListener("click", manualRemoveFallback);
+  }
+
+  removeBtn.addEventListener("click", attemptRemove);
 
   card.appendChild(top);
   card.appendChild(metricRow);
@@ -367,8 +327,19 @@ exploreBody.addEventListener("click", async (e) => {
   const addBtn = e.target.closest(".add-btn");
   if (addBtn) {
     const ticker = addBtn.dataset.ticker;
+
+    // Na een eerdere mislukte poging staat de knop in fallback-modus: een
+    // bewuste tweede klik doet dan de handmatige kopieer+GitHub-flow, in
+    // plaats van dat een eerste klik de foutmelding meteen overschaduwt.
+    if (addBtn.dataset.mode === "fallback") {
+      copyText(`"${ticker}",`);
+      window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
+      flashButton(addBtn, "Gekopieerd, GitHub geopend…");
+      return;
+    }
+
     addBtn.disabled = true;
-    const worked = await callGithubApi("add", ticker);
+    const worked = await callWorker("add", ticker);
     addBtn.disabled = false;
 
     if (worked) {
@@ -380,9 +351,8 @@ exploreBody.addEventListener("click", async (e) => {
       return;
     }
 
-    copyText(`"${ticker}",`);
-    window.open(TICKERS_JSON_EDIT_URL, "_blank", "noopener");
-    flashButton(addBtn, "Gekopieerd, GitHub geopend…");
+    addBtn.dataset.mode = "fallback";
+    addBtn.textContent = "Kopieer + open GitHub";
   }
 });
 
