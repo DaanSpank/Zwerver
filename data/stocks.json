@@ -1,64 +1,63 @@
 {
-  "generated_at": "2026-08-23T19:25:28+00:00",
-  "note": "Placeholder-data. Wordt overschreven door de eerste run van de 'Update stock data' GitHub Action.",
+  "generated_at": "2026-08-23T19:42:28+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
       "name": "Apple Inc.",
-      "overall_color": "yellow",
+      "overall_color": "green",
       "metrics": [
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 32,
+          "value": 35.475918,
           "unit": "x",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "red",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 1.8,
+          "value": 0.78445,
           "unit": "x",
-          "color": "red",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "yellow",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 1.5,
+          "value": 1.4875101,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.05,
+          "value": 0.164,
           "unit": "%",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 100000000000.0,
+          "value": 107721875456,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.16,
+          "value": 0.1204,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
@@ -71,55 +70,55 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 35,
+          "value": 26.951477,
           "unit": "x",
           "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.35,
+          "value": 0.29118,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.38,
+          "value": 0.34039003,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.15,
+          "value": 0.177,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 70000000000.0,
+          "value": 16545500160,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.25,
+          "value": 0.1983,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
@@ -132,116 +131,116 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 24,
+          "value": 17.301556,
           "unit": "x",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.08,
+          "value": 0.18859,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.3,
+          "value": 0.48676,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.1,
+          "value": 0.242,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 60000000000.0,
+          "value": 22665000960,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": null,
+          "value": 0.042600002,
           "unit": "%",
-          "color": "na",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
     },
     {
       "ticker": "AMZN",
-      "name": "Amazon.com Inc.",
-      "overall_color": "yellow",
+      "name": "Amazon.com, Inc.",
+      "overall_color": "green",
       "metrics": [
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 40,
+          "value": 20.790194,
           "unit": "x",
-          "color": "red",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "yellow",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.55,
+          "value": 0.45616999999999996,
           "unit": "x",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.2,
+          "value": 0.30558002,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.11,
+          "value": 0.196,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 30000000000.0,
+          "value": 3219124992,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": null,
+          "value": 0.0,
           "unit": "%",
-          "color": "na",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
@@ -254,116 +253,116 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 55,
+          "value": 32.88208,
           "unit": "x",
-          "color": "red",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "yellow",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.4,
+          "value": 0.06555,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.9,
+          "value": 1.14288,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.6,
+          "value": 0.852,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 25000000000.0,
+          "value": 46335873024,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.02,
+          "value": 0.0061000003,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
     },
     {
       "ticker": "TSLA",
-      "name": "Tesla Inc.",
+      "name": "Tesla, Inc.",
       "overall_color": "yellow",
       "metrics": [
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 70,
+          "value": 332.89905,
           "unit": "x",
           "color": "red",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.2,
+          "value": 0.18373,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.1,
+          "value": 0.046669997,
           "unit": "%",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "red",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.02,
+          "value": 0.255,
           "unit": "%",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 3000000000.0,
+          "value": 4835999744,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": null,
+          "value": 0.0,
           "unit": "%",
-          "color": "na",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
@@ -376,55 +375,55 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 30,
+          "value": 59.526157,
           "unit": "x",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "red",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.4,
+          "value": 0.09092,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.45,
+          "value": 0.53942,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.05,
+          "value": 0.213,
           "unit": "%",
-          "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 3000000000.0,
+          "value": 8437675008,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.45,
+          "value": 0.2972,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
@@ -437,55 +436,55 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 8,
+          "value": 10.324116,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.4,
+          "value": 0.402,
           "unit": "x",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lagere schuldgraad betekent minder financieel risico."
         },
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.12,
+          "value": 0.14341,
           "unit": "%",
           "color": "yellow",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Hoe efficiënt het bedrijf winst maakt met het eigen vermogen."
         },
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": -0.05,
+          "value": 0.447,
           "unit": "%",
-          "color": "red",
-          "source": "Voorbeelddata (placeholder)",
+          "color": "green",
+          "source": "Yahoo Finance",
           "explanation": "Groei van de omzet ten opzichte van vorig jaar."
         },
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 20000000000.0,
+          "value": 21458374656,
           "unit": "$",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.35,
+          "value": 0.32709998,
           "unit": "%",
           "color": "green",
-          "source": "Voorbeelddata (placeholder)",
+          "source": "Yahoo Finance",
           "explanation": "Lager percentage van de winst uitgekeerd = duurzamer dividend. Niet van toepassing als er geen dividend is."
         }
       ]
