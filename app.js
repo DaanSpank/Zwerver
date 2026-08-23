@@ -18,6 +18,15 @@ const detailSourceNote = document.getElementById("detail-source-note");
 const detailClose = document.getElementById("detail-close");
 
 let stocks = [];
+let universe = [];
+
+const tabWatchlist = document.getElementById("tab-watchlist");
+const tabExplore = document.getElementById("tab-explore");
+const panelWatchlist = document.getElementById("panel-watchlist");
+const panelExplore = document.getElementById("panel-explore");
+const exploreBody = document.getElementById("explore-body");
+const exploreEmptyState = document.getElementById("explore-empty-state");
+const exploreNote = document.getElementById("explore-note");
 
 function formatValue(metric) {
   if (metric.value === null || metric.value === undefined) {
@@ -136,7 +145,69 @@ function renderGrid(filter) {
   emptyState.hidden = filtered.length !== 0;
 }
 
-searchInput.addEventListener("input", () => renderGrid(searchInput.value));
+let activeTab = "watchlist";
+
+function renderExplore(filter) {
+  const term = (filter || "").trim().toLowerCase();
+  const filtered = universe.filter(
+    (t) =>
+      !term ||
+      t.ticker.toLowerCase().includes(term) ||
+      t.name.toLowerCase().includes(term) ||
+      (t.exchange || "").toLowerCase().includes(term)
+  );
+
+  exploreBody.innerHTML = "";
+  filtered.forEach((t) => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td><strong>${t.ticker}</strong></td>
+      <td>${t.name}</td>
+      <td>${t.exchange || "VS (NYSE/Nasdaq)"}</td>
+      <td><button type="button" class="copy-btn" data-ticker="${t.ticker}">Kopieer</button></td>
+    `;
+    exploreBody.appendChild(tr);
+  });
+  exploreEmptyState.hidden = filtered.length !== 0;
+}
+
+exploreBody.addEventListener("click", (e) => {
+  const btn = e.target.closest(".copy-btn");
+  if (!btn) return;
+  navigator.clipboard?.writeText(btn.dataset.ticker).then(() => {
+    const original = btn.textContent;
+    btn.textContent = "Gekopieerd!";
+    setTimeout(() => (btn.textContent = original), 1200);
+  });
+});
+
+function setActiveTab(tab) {
+  activeTab = tab;
+  const onWatchlist = tab === "watchlist";
+
+  tabWatchlist.classList.toggle("is-active", onWatchlist);
+  tabWatchlist.setAttribute("aria-selected", String(onWatchlist));
+  tabExplore.classList.toggle("is-active", !onWatchlist);
+  tabExplore.setAttribute("aria-selected", String(!onWatchlist));
+
+  panelWatchlist.hidden = !onWatchlist;
+  panelExplore.hidden = onWatchlist;
+
+  searchInput.placeholder = onWatchlist
+    ? "Zoek op ticker of naam…"
+    : "Zoek nieuwe ticker op naam, symbool of beurs…";
+  searchInput.value = "";
+  onWatchlist ? renderGrid("") : renderExplore("");
+}
+
+tabWatchlist.addEventListener("click", () => setActiveTab("watchlist"));
+tabExplore.addEventListener("click", () => setActiveTab("explore"));
+
+searchInput.addEventListener("input", () => {
+  activeTab === "watchlist"
+    ? renderGrid(searchInput.value)
+    : renderExplore(searchInput.value);
+});
 
 async function init() {
   try {
@@ -154,6 +225,19 @@ async function init() {
     emptyState.hidden = false;
     emptyState.textContent =
       "Kon data/stocks.json niet laden. Draai dit via een lokale server of GitHub Pages (niet via file://).";
+    console.error(err);
+  }
+
+  try {
+    const res = await fetch("data/ticker-universe.json", { cache: "no-store" });
+    const data = await res.json();
+    universe = [
+      ...(data.us || []),
+      ...(data.europe || []),
+    ].sort((a, b) => a.ticker.localeCompare(b.ticker));
+    exploreNote.textContent = data.note || "";
+  } catch (err) {
+    exploreNote.textContent = "Kon de tickerlijst niet laden.";
     console.error(err);
   }
 }

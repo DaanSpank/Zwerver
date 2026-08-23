@@ -10,6 +10,16 @@
   <header class="app-header">
     <h1>Aandelen Gezondheidschecker</h1>
     <p class="subtitle">Fundamentele gezondheid per aandeel in één oogopslag</p>
+
+    <div class="tabs" role="tablist">
+      <button id="tab-watchlist" class="tab-btn is-active" role="tab" aria-selected="true" aria-controls="panel-watchlist">
+        Mijn watchlist
+      </button>
+      <button id="tab-explore" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-explore">
+        Nieuwe tickers zoeken
+      </button>
+    </div>
+
     <input
       id="search"
       type="search"
@@ -20,8 +30,33 @@
   </header>
 
   <main>
-    <section id="grid" class="stock-grid" aria-live="polite"></section>
-    <p id="empty-state" class="empty-state" hidden>Geen aandelen gevonden.</p>
+    <section id="panel-watchlist" role="tabpanel" aria-labelledby="tab-watchlist">
+      <section id="grid" class="stock-grid" aria-live="polite"></section>
+      <p id="empty-state" class="empty-state" hidden>Geen aandelen gevonden.</p>
+    </section>
+
+    <section id="panel-explore" role="tabpanel" aria-labelledby="tab-explore" hidden>
+      <p class="explore-hint">
+        Referentielijst van bekende Amerikaanse en Europese aandelen om te onderzoeken.
+        Dit zijn geen live cijfers — vind een ticker, kopieer 'm en voeg hem toe aan
+        <code>tickers.json</code> om 'm in je watchlist te laten meedraaien.
+      </p>
+      <div id="explore-table-wrap" class="explore-table-wrap">
+        <table class="explore-table">
+          <thead>
+            <tr>
+              <th>Ticker</th>
+              <th>Naam</th>
+              <th>Beurs</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="explore-body"></tbody>
+        </table>
+      </div>
+      <p id="explore-empty-state" class="empty-state" hidden>Geen tickers gevonden.</p>
+      <p id="explore-note" class="explore-note"></p>
+    </section>
   </main>
 
   <div id="detail-overlay" class="detail-overlay" hidden>

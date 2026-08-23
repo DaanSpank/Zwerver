@@ -30,6 +30,14 @@ Bewerk `tickers.json` en commit. De volgende run van de Action (of een
 handmatige trigger via **Actions → Update stock data → Run workflow**)
 neemt de wijziging mee.
 
+Om nieuwe tickers te vínden staat er in de site een tab **"Nieuwe tickers
+zoeken"**: een doorzoekbare referentielijst van ~280 bekende Amerikaanse en
+Europese large-cap aandelen (`data/ticker-universe.json`), los van je
+watchlist. Dit zijn geen live cijfers — vind een ticker, kopieer 'm en zet
+'m handmatig in `tickers.json`. Deze lijst is samengesteld uit
+trainingskennis (niet uit een live bron), dus controleer een ticker voordat
+je erop vertrouwt; zie het `note`-veld in dat bestand.
+
 ## Parameters
 
 | Parameter | Groen | Geel | Rood |
