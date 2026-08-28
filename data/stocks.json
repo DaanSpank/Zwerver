@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-27T17:28:47+00:00",
+  "generated_at": "2026-08-28T18:22:26+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
@@ -9,7 +9,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 36.191734,
+          "value": 36.69403,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -70,7 +70,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 28.034502,
+          "value": 28.723927,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -131,7 +131,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 17.109863,
+          "value": 17.40316,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -192,7 +192,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 20.571945,
+          "value": 21.367256,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -253,16 +253,16 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 35.17635,
+          "value": 27.637169,
           "unit": "x",
-          "color": "red",
+          "color": "yellow",
           "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.06555,
+          "value": 0.16971,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -271,7 +271,7 @@
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 1.14288,
+          "value": 1.17211,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -280,7 +280,7 @@
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.852,
+          "value": 1.059,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -289,7 +289,7 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 46335873024,
+          "value": 41809874944,
           "unit": "$",
           "color": "green",
           "source": "Yahoo Finance",
@@ -298,7 +298,7 @@
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.0061000003,
+          "value": 0.0354,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -314,7 +314,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 330.82242,
+          "value": 326.86322,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -375,7 +375,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 58.347034,
+          "value": 57.418606,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -436,7 +436,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 10.021571,
+          "value": 10.034292,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
