@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-31T13:08:03+00:00",
+  "generated_at": "2026-09-01T11:21:55+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
@@ -9,7 +9,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 36.62085,
+          "value": 36.377728,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -70,7 +70,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 28.577076,
+          "value": 28.245548,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -131,7 +131,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 17.390366,
+          "value": 17.035643,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -192,7 +192,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 21.417202,
+          "value": 20.881832,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -253,7 +253,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 27.468435,
+          "value": 27.946835,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -314,7 +314,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 322.91666,
+          "value": 343.8785,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -375,7 +375,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 57.148247,
+          "value": 57.47238,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -436,7 +436,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 10.0564165,
+          "value": 10.11615,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
