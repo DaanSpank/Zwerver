@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-30T12:25:30+00:00",
+  "generated_at": "2026-10-31T11:55:10+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
@@ -9,7 +9,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 40.012615,
+          "value": 39.52179,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -70,7 +70,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 27.669104,
+          "value": 27.239561,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -79,7 +79,7 @@
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.12157,
+          "value": 0.28465,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -106,7 +106,7 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 13808749568,
+          "value": 2994125056,
           "unit": "$",
           "color": "green",
           "source": "Yahoo Finance",
@@ -131,7 +131,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 14.8208885,
+          "value": 14.613055,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -140,7 +140,7 @@
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.20946,
+          "value": 0.22187,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -167,16 +167,16 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 5517000192,
+          "value": -1162499968,
           "unit": "$",
-          "color": "green",
+          "color": "red",
           "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
         {
           "id": "dividend_payout",
           "label": "Dividend uitkeringsratio",
-          "value": 0.042600002,
+          "value": 0.044899996,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -192,7 +192,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 19.613031,
+          "value": 19.430073,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -201,7 +201,7 @@
         {
           "id": "debt_to_equity",
           "label": "Schuld / Eigen vermogen",
-          "value": 0.45616999999999996,
+          "value": 0.4432,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -210,7 +210,7 @@
         {
           "id": "roe",
           "label": "Return on Equity",
-          "value": 0.30558002,
+          "value": 0.27416,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -219,7 +219,7 @@
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.196,
+          "value": 0.121,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -228,9 +228,9 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 3219124992,
+          "value": -11545749504,
           "unit": "$",
-          "color": "green",
+          "color": "red",
           "source": "Yahoo Finance",
           "explanation": "Positieve vrije kasstroom geeft financiële flexibiliteit."
         },
@@ -253,7 +253,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 27.01138,
+          "value": 25.87105,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -314,7 +314,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 443.1868,
+          "value": 439.35162,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -375,7 +375,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 41.232777,
+          "value": 38.531006,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -436,7 +436,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 9.346354,
+          "value": 11.996689,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -463,7 +463,7 @@
         {
           "id": "revenue_growth",
           "label": "Omzetgroei (YoY)",
-          "value": 0.399,
+          "value": 0.362,
           "unit": "%",
           "color": "green",
           "source": "Yahoo Finance",
@@ -472,7 +472,7 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": 28944750592,
+          "value": 29048250368,
           "unit": "$",
           "color": "green",
           "source": "Yahoo Finance",
