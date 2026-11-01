@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-31T11:55:10+00:00",
+  "generated_at": "2026-11-01T12:54:42+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
@@ -228,7 +228,7 @@
         {
           "id": "free_cash_flow",
           "label": "Free Cash Flow",
-          "value": -11545749504,
+          "value": -11139749888,
           "unit": "$",
           "color": "red",
           "source": "Yahoo Finance",
