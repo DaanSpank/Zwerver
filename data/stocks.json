@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-20T15:05:55+00:00",
+  "generated_at": "2026-11-21T14:25:48+00:00",
   "stocks": [
     {
       "ticker": "AAPL",
@@ -9,7 +9,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 38.92921,
+          "value": 38.146996,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -70,7 +70,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 26.184761,
+          "value": 25.2881,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -131,7 +131,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 14.637598,
+          "value": 13.853265,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -192,9 +192,9 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 20.871868,
+          "value": 19.953114,
           "unit": "x",
-          "color": "yellow",
+          "color": "green",
           "source": "Yahoo Finance",
           "explanation": "Lagere K/W duidt op een relatief goedkoper aandeel t.o.v. de winst."
         },
@@ -253,7 +253,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 15.190117,
+          "value": 13.483351,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
@@ -314,7 +314,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 408.24228,
+          "value": 380.02197,
           "unit": "x",
           "color": "red",
           "source": "Yahoo Finance",
@@ -375,7 +375,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 32.51452,
+          "value": 31.156988,
           "unit": "x",
           "color": "yellow",
           "source": "Yahoo Finance",
@@ -436,7 +436,7 @@
         {
           "id": "pe_ratio",
           "label": "Koers/Winst-verhouding",
-          "value": 8.163195,
+          "value": 8.123263,
           "unit": "x",
           "color": "green",
           "source": "Yahoo Finance",
